@@ -53,6 +53,15 @@ async function run() {
             res.send(result);
         });
 
+        app.get('/reviews', async (req, res) => {
+            const query = {}
+            const sort = { date: -1 };
+            const cursor = reviewCollection.find(query).sort(sort);
+            const reviews = await cursor.toArray();
+            res.send(reviews);
+
+        });
+
     }
     finally {
 
