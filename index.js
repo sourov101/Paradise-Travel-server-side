@@ -42,8 +42,16 @@ async function run() {
             const addedService = req.body;
             const result = await serviceCollection.insertOne(addedService);
             res.send(result);
-        })
+        });
 
+
+        const reviewCollection = client.db('paradiseDb').collection('review');
+
+        app.post('/reviews', async (req, res) => {
+            const addedReview = req.body;
+            const result = await reviewCollection.insertOne(addedReview);
+            res.send(result);
+        });
 
     }
     finally {
