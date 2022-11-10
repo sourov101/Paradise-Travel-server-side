@@ -96,7 +96,7 @@ async function run() {
 
         });
 
-        app.get('/reviews/:id', async (req, res) => {
+        app.get('/reviews/:id', verifyJWT, async (req, res) => {
 
             const decoded = req.decoded;
             if (decoded?.email !== req.query.email) {
@@ -117,7 +117,7 @@ async function run() {
             const id = req.params.id;
             const query = { _id: ObjectId(id) }
             const result = await reviewCollection.deleteOne(query);
-            return res.send(result);
+            res.send(result);
 
         })
 
